@@ -1,0 +1,1 @@
+C-ohjelmointikielellä toteutettu Ristinolla-peli tekstipohjaisella käyttöliittymällä.
