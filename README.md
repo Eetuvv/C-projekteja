@@ -1,0 +1,1 @@
+Pikku projekteja C-ohjelmointikielellä.
