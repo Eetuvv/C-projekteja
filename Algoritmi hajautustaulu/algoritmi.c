@@ -12,16 +12,16 @@ struct Sanakirja { //Tietue, jossa avain-arvo parit
     int arvo;
 };
 
-struct sanat { //Tietue, jota k‰ytet‰‰n uuden taulukon luomiseen ja j‰rjest‰miseen
+struct sanat { //Tietue, jota k√§ytet√§√§n uuden taulukon luomiseen ja j√§rjest√§miseen
     char *mki;
     int luku;
 };
 
 clock_t start,end;
 
-struct Sanakirja* hashTaulu[TAULUNKOKO]; //Tehd‰‰n hash-taulukko, johon lis‰t‰‰n sanakirja-rakenteita joissa avain ja arvo
+struct Sanakirja* hashTaulu[TAULUNKOKO]; //Tehd√§√§n hash-taulukko, johon lis√§t√§√§n sanakirja-rakenteita joissa avain ja arvo
 struct Sanakirja* sana;  //Alustetaan sanakirja-rakenteen mukainen apumuuttuja
-int count; //T‰h‰n lasketaan sanojen m‰‰r‰
+int count; //T√§h√§n lasketaan sanojen m√§√§r√§
 
 void lisaa(char *avain);
 unsigned int haeTiiviste(char *avain);
@@ -31,11 +31,10 @@ void quicksort(struct sanat[], int alku, int loppu);
 
 
 unsigned int haeTiiviste(char *avain) {
-    //Laskee tiivisteen avaimelle. K‰yd‰‰n l‰pi merkkijonon merkit, ja kerrotaan tiviiste-muuttuja alkuvulla ja lis‰t‰‰n siihen viel‰ kirjainta vastaava arvo,
-    //jotta pienennet‰‰n tˆrm‰ysten todenn‰kˆisyytt‰. Lopulta muodostetaan hash-arvo, joka saadaan laskemalla jakoj‰‰nnˆs jakamalla laskettu tiiviste-muuttuja taulukon koolla.
-    //Tiivisteelle k‰ytet‰‰n unsigned-tyyppist‰ kokonaislukua, jotta mahdollisia negatiivisia lukuja ei oteta huomioon.
+    //Laskee tiivisteen avaimelle. K√§yd√§√§n l√§pi merkkijonon merkit, ja kerrotaan tiviiste-muuttuja alkuvulla ja lis√§t√§√§n siihen viel√§ kirjainta vastaava arvo,
+    //jotta pienennet√§√§n t√∂rm√§ysten todenn√§k√∂isyytt√§. Lopulta muodostetaan hash-arvo, joka saadaan laskemalla jakoj√§√§nn√∂s jakamalla laskettu tiiviste-muuttuja taulukon koolla.
+    //Tiivisteelle k√§ytet√§√§n unsigned-tyyppist√§ kokonaislukua, jotta mahdollisia negatiivisia lukuja ei oteta huomioon.
 
-    //Funktio lˆytyi stackoverflowsta
     unsigned int tiiviste = 0;
     for (int i = 0; avain[i]; i++) {
         tiiviste = 31*tiiviste + avain[i];
@@ -56,21 +55,21 @@ void lisaa(char *avain) {
 
     if (hashTaulu[hashArvo] != NULL) {
 
-        if(!strcmp(hashTaulu[hashArvo]->avain, sana->avain)) {  //Jos avain lˆytyy jo taulukosta, kasvatetaan sen arvoa yhdell‰.
+        if(!strcmp(hashTaulu[hashArvo]->avain, sana->avain)) {  //Jos avain l√∂ytyy jo taulukosta, kasvatetaan sen arvoa yhdell√§.
 
             hashTaulu[hashArvo]->arvo += sana->arvo;
             return;
         }
     }
 
-    while(hashTaulu[hashArvo] != NULL) {  //Etsit‰‰n taulukosta tyhj‰‰ kohtaa, kunnes sellainen lˆydet‰‰n (kun taulukon indeksin arvo on NULL)
+    while(hashTaulu[hashArvo] != NULL) {  //Etsit√§√§n taulukosta tyhj√§√§ kohtaa, kunnes sellainen l√∂ydet√§√§n (kun taulukon indeksin arvo on NULL)
 
         hashArvo++;
 
         hashArvo %= TAULUNKOKO;
     }
 
-    hashTaulu[hashArvo] = sana; //Lis‰t‰‰n hash-taulukkoon muuttuja sana, jolla on avain ja arvo, kun tyhj‰ kohta on lˆydetty.
+    hashTaulu[hashArvo] = sana; //Lis√§t√§√§n hash-taulukkoon muuttuja sana, jolla on avain ja arvo, kun tyhj√§ kohta on l√∂ydetty.
     count+=1;
 }
 
@@ -108,7 +107,7 @@ int partition(struct sanat arr[], int p, int r) { //Quicksort-algoritmin lajitte
     return i + 1;
 }
 
-void quicksort(struct sanat arr[], int p, int r) { //Luentodiojen mukainen quicksort-algoritmi
+void quicksort(struct sanat arr[], int p, int r) { // Quicksort-algoritmi
     int q;
     if (p < r) {
         q = partition(arr, p, r);
@@ -119,7 +118,7 @@ void quicksort(struct sanat arr[], int p, int r) { //Luentodiojen mukainen quick
 
 void tulostaSanatJarjestyksessa() {
 
-    //Kopioidaan hajautustaulusta arvot uuteen taulukkoon ja j‰rjestet‰‰n uuden taulukon arvot quicksortilla laskevaan j‰rjestykseen
+    //Kopioidaan hajautustaulusta arvot uuteen taulukkoon ja j√§rjestet√§√§n uuden taulukon arvot quicksortilla laskevaan j√§rjestykseen
 
     struct sanat taulu[count];
 
@@ -145,7 +144,7 @@ int main(void) {
 
     FILE *tiedosto;
 
-    //Aloitetaan suoritukseen kuluvan ajan mittaaminen t‰ss‰
+    //Aloitetaan suoritukseen kuluvan ajan mittaaminen t√§ss√§
     start = clock();
     printf("Suoritetaan algoritmi WarPeace-tekstitiedostolle.\n");
     printf("-------------------------------------------------\n");
@@ -154,7 +153,7 @@ int main(void) {
     char sana[500];
     char *uusisana;
 
-    while((fscanf(tiedosto, " %500[a-zA-Z']%*[^a-zA-Z'] ", sana) == 1)) {  //K‰yd‰‰n tekstitiedosto l‰pi, ja karsitaan sanoista pois kaikki ylim‰‰r‰iset merkit.
+    while((fscanf(tiedosto, " %500[a-zA-Z']%*[^a-zA-Z'] ", sana) == 1)) {  //K√§yd√§√§n tekstitiedosto l√§pi, ja karsitaan sanoista pois kaikki ylim√§√§r√§iset merkit.
 
         uusisana = strdup(sana); //Kopioidaan sana uuteen muuttujaan null-terminoituna.
         for (int i = 0; uusisana[i]; i++) {
@@ -168,7 +167,7 @@ int main(void) {
     fclose(tiedosto);
     tulostaSanatJarjestyksessa();
 
-    //Suorituksen mittaaminen p‰‰ttyy t‰h‰n
+    //Suorituksen mittaaminen p√§√§ttyy t√§h√§n
     end = clock();
     double totalTime = (double)(end - start) / CLOCKS_PER_SEC;
     printf("\nAikaa suoritukseen kului: %1f sekuntia\n",totalTime);
